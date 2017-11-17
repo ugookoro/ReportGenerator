@@ -63,12 +63,19 @@ namespace ReportGenerator
         {
             try
             {
-                ReportHeaderAttribute[] reportHeaders = (ReportHeaderAttribute[])Attribute.GetCustomAttributes(typeof(T), typeof(ReportHeaderAttribute));
-                if (reportHeaders == null)
+                var headers = new List<string>();
+                var members = typeof(T).GetProperties();
+
+                foreach (var member in members)
                 {
-                    throw new Exception("");
+                    var reportHeader = (ReportHeaderAttribute) Attribute.GetCustomAttribute(member, typeof(ReportHeaderAttribute));
+                    if (reportHeader != null)
+                    {
+                        headers.Add(reportHeader.Name);
+                    }
                 }
-                this.ReportHeaders = reportHeaders.Select(x => x.Name).ToList();
+                this.ReportHeaders = headers;
+                
             }
             catch (Exception ex)
             {
