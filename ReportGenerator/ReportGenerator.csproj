@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ReportColumnAttribute.cs" />
+    <Compile Include="Attributes\ReportTitleAttribute.cs" />
     <Compile Include="Attributes\ReportHeaderAttribute.cs" />
     <Compile Include="IReportGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
