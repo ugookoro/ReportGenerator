@@ -17,11 +17,11 @@ namespace ReportGenerator
             get { return this.ReportTitle; }
         }
 
-        public List<string> Headers
+        public Dictionary<int,string> Headers
         {
             get { return this.ReportHeaders; }
         }
-        private List<string> ReportHeaders;
+        private Dictionary<int,string> ReportHeaders;
         public ReportGenerator()
         {
             GetReportTitle();
@@ -63,7 +63,7 @@ namespace ReportGenerator
         {
             try
             {
-                var headers = new List<string>();
+                var headers = new Dictionary<int, string>();
                 var members = typeof(T).GetProperties();
 
                 foreach (var member in members)
@@ -71,10 +71,12 @@ namespace ReportGenerator
                     var reportHeader = (ReportHeaderAttribute) Attribute.GetCustomAttribute(member, typeof(ReportHeaderAttribute));
                     if (reportHeader != null)
                     {
-                        headers.Add(reportHeader.Name);
+                        headers.Add(reportHeader.OrderNumber, reportHeader.Name);
                     }
                 }
-                this.ReportHeaders = headers;
+                this.ReportHeaders = headers.OrderBy(x=>x.Key).ToDictionary(x=>x.Key,x=>x.Value);
+                //ReportHeaders.OrderBy(x => x.Key);
+              
                 
             }
             catch (Exception ex)

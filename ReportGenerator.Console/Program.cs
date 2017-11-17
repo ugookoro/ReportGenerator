@@ -18,10 +18,20 @@ namespace ReportGenerator.Console
 
             System.Console.WriteLine($"##################{reportTitle}#################");
             System.Console.WriteLine();
-            reportHeaders.ForEach(x => { System.Console.Write($"{x} | "); });
-
-            System.Console.ReadLine();
-
+            System.Console.WriteLine();
+            // reportHeaders.ForEach(x => { System.Console.Write("{0,-20}",x); }); //formats the string with spacing and alignments
+            try
+            {
+                foreach (var header in reportHeaders)
+                {
+                    System.Console.Write("{0,-20}", header.Value); //formats the string with spacing and alignments
+                }
+                System.Console.ReadLine();
+            }
+            catch
+            {
+                System.Console.WriteLine("Error occured!");  //vague error
+            }
         }
     }
 }
