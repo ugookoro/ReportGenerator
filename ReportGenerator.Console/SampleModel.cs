@@ -9,7 +9,7 @@ namespace ReportGenerator.Console
 {
 
     [ReportTitle("SAMPLE REPORT TITLE")]
-    public class SampleModel
+    public class SampleModel 
     {
         [ReportHeader("Age",2)]
         public int Age { get; set; }
@@ -22,6 +22,19 @@ namespace ReportGenerator.Console
 
         [ReportHeader("Gender",1)]
         public string Sex { get; set; }
+
+        public SampleModel(int age, string name, string state, string sex)
+        {
+            this.Age = age;
+            this.Name = name;
+            this.State = state;
+            this.Sex = sex;
+        }
+
+        //public IEnumerator<T> GetEnumerator()
+        //{
+        //    returns this.GetEnumerator;
+        //}
 
     }
 }

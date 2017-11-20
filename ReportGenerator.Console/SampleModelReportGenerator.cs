@@ -8,9 +8,9 @@ namespace ReportGenerator.Console
 {
     public class SampleModelReportGenerator : ReportGenerator<SampleModel>
     {
-        //public SampleModelReportGenerator() :base()
-        //{
+        public SampleModelReportGenerator() : base()
+        {
 
-        //}
+        }
     }
 }
