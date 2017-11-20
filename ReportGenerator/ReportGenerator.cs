@@ -96,30 +96,32 @@ namespace ReportGenerator
             try
             {
                 Dictionary<int, System.Reflection.PropertyInfo> reportPropertiesDictionary = new Dictionary<int, System.Reflection.PropertyInfo>();
-               // List<string> reportName = new List<string>();
+                // List<string> reportName = new List<string>();
                 Type reportType = typeof(T);
                 var propertyArray = reportType.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(ReportHeaderAttribute)));
                 var propertyAndSort = propertyArray.Zip(sortNumber, (p, s) => new { propertyArray = p, sortNumber = s });
                 //iterate two lists with one foreach
-                foreach(var ps in propertyAndSort)
+                foreach (var ps in propertyAndSort)
                 {
                     reportPropertiesDictionary.Add(ps.sortNumber, ps.propertyArray);
                     //reportName.Add(ps.propertyArray.Name);
                 }
 
                 var sortedReportPropertiesDictionary = reportPropertiesDictionary.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
-                
-                foreach(var reportProp in sortedReportPropertiesDictionary)
+                foreach (var report in model)
                 {
-                    foreach(var report in model)
+                    foreach (var reportProp in sortedReportPropertiesDictionary)
                     {
-                        string reportFinal = reportProp.Value.GetValue(report).ToString();
-                        Console.Write("{0,-20}", reportFinal);
+                        //foreach (var report in model)
+                        //{
+                            string reportFinal = reportProp.Value.GetValue(report).ToString();
+                            Console.Write("{0,-20}", reportFinal);
+                        //}
+
                     }
                     Console.WriteLine("");
-                   
+
                 }
-                
 
 
 
@@ -132,3 +134,37 @@ namespace ReportGenerator
         }
     }
 }
+
+
+
+//try
+//            {
+//                Dictionary<int, System.Reflection.PropertyInfo> reportPropertiesDictionary = new Dictionary<int, System.Reflection.PropertyInfo>();
+//// List<string> reportName = new List<string>();
+//Type reportType = typeof(T);
+//var propertyArray = reportType.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(ReportHeaderAttribute)));
+//var propertyAndSort = propertyArray.Zip(sortNumber, (p, s) => new { propertyArray = p, sortNumber = s });
+//                //iterate two lists with one foreach
+//                foreach(var ps in propertyAndSort)
+//                {
+//                    reportPropertiesDictionary.Add(ps.sortNumber, ps.propertyArray);
+//                    //reportName.Add(ps.propertyArray.Name);
+//                }
+
+//                var sortedReportPropertiesDictionary = reportPropertiesDictionary.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+                
+//                foreach(var reportProp in sortedReportPropertiesDictionary)
+//                {
+//                    foreach(var report in model)
+//                    {
+//                        string reportFinal = reportProp.Value.GetValue(report).ToString();
+//Console.Write("{0,-20}", reportFinal);
+//                    }
+//                    Console.WriteLine("");
+                   
+//                }
+                
+
+
+
+            //}
