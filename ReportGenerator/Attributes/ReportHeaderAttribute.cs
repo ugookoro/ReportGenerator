@@ -10,21 +10,21 @@ namespace ReportGenerator.Attributes
     public class ReportHeaderAttribute : Attribute
     {
         private string name;
-        private int orderNumber;
+        private int headerPosition;
 
         public virtual string Name
         {
             get { return name; }
         }
-        public virtual int OrderNumber
+        public virtual int HeaderPosition
         {
-            get { return orderNumber; }
+            get { return headerPosition; }
         }
 
-        public ReportHeaderAttribute(string name, int orderNumber)
+        public ReportHeaderAttribute(string name, int headerPosition)
         {
             this.name = name;
-            this.orderNumber = orderNumber;
+            this.headerPosition = headerPosition;
         }
     }
 }

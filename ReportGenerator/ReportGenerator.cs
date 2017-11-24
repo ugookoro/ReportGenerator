@@ -73,8 +73,8 @@ namespace ReportGenerator
                     var reportHeader = (ReportHeaderAttribute)Attribute.GetCustomAttribute(member, typeof(ReportHeaderAttribute));
                     if (reportHeader != null)
                     {
-                        headers.Add(reportHeader.OrderNumber, reportHeader.Name);
-                        sortNumber.Add(reportHeader.OrderNumber);
+                        headers.Add(reportHeader.HeaderPosition, reportHeader.Name);
+                        sortNumber.Add(reportHeader.HeaderPosition);
                     }
                 }
                 this.ReportHeaders = headers.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
@@ -96,7 +96,6 @@ namespace ReportGenerator
             try
             {
                 Dictionary<int, System.Reflection.PropertyInfo> reportPropertiesDictionary = new Dictionary<int, System.Reflection.PropertyInfo>();
-                // List<string> reportName = new List<string>();
                 Type reportType = typeof(T);
                 var propertyArray = reportType.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(ReportHeaderAttribute)));
                 var propertyAndSort = propertyArray.Zip(sortNumber, (p, s) => new { propertyArray = p, sortNumber = s });
